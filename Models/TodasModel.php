@@ -10,7 +10,7 @@ class TodasModel extends Query{
     public function getTareas(int $id_usario)
     {
         $sql = "SELECT * FROM tareas WHERE id_usuario='$id_usuario'";
-        $data = $this->sellectAll($sql)
+        $data = $this->sellectAll($sql);
         return $data;
     }
 
