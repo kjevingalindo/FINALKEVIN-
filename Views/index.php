@@ -26,6 +26,10 @@
                                                 <input class="form-control py-4" id="usuario" name="usuario" type="text" placeholder="Ingrese usuario" />
                                             </div>
                                             <div class="form-group">
+                                                <label class="small mb-1" for="correo"><i class="fas fa-envelope"></i> email</label>
+                                                <input class="form-control py-4" id="correo" name="correo" type="correo" placeholder="example@gmail.com" />
+                                            </div>
+                                            <div class="form-group">
                                                 <label class="small mb-1" for="clave"><i class="fas fa-key"></i> Contraseña</label>
                                                 <input class="form-control py-4" id="clave" name="clave" type="password" placeholder="Ingrese contraseña" />
                                             </div>
@@ -34,11 +38,11 @@
                                             </div>
                                             <div class="form-group d-flex align-items-center justify-content-center mt-4 mb-0">
                         
-                                                <button class="btn btn-primary m-2" type="submit" onclick="frmLogin(event);">Login</button>
+                                                <button class="btn btn-primary m-2" type="submit" onclick="frmLogin(event);">Iniciar sesión</button>
 
                                                 <button class="btn btn-danger m-2" type="button" onclick="frmRegister();">Registrar</button> 
+                                            
                                             </div>
-
                                         </form>
                                     </div>
                                 </div>
@@ -65,6 +69,10 @@
                                         <div class="form-group">
                                             <label for="nombre">Nombre</label>
                                             <input id="nombre1" class="form-control" type="text" name="nombre1" placeholder="Nombre">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="correo">correo</label>
+                                            <input id="correo1" class="form-control" type="email" name="correo1" placeholder="example@gmail.com">
                                         </div>
                                         <div class="row" id="claves">
                                             <div class="col-md-6">
