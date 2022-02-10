@@ -20,17 +20,19 @@ class UsuariosModel extends Query{
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function registrarUsuario(string $usuario, string $nombre, string $clave)
+    public function registrarUsuario(string $usuario, string $nombre, string $clave, string $id1)
     {
         $this->usuario = $usuario;
         $this->nombre = $nombre;
         $this->clave = $clave;
+        $this->id = $id1;
         
+
         $verificar = "SELECT * FROM usuarios WHERE usuario = '$this->usuario'";
         $existe = $this->select($verificar);
         if (empty($existe)) {
-            $sql = "INSERT INTO usuarios (usuario, nombre, clave) VALUES (?,?,?)";
-            $datos = array($this->usuario, $this->nombre, $this->clave);
+            $sql = "INSERT INTO usuarios (usuario, nombre, email,clave) VALUES (?,?,?,?)";
+            $datos = array($this->usuario, $this->nombre, $this->id, $this->clave);
 
             $data = $this->save($sql, $datos);
             if ($data == 1) {
