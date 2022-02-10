@@ -8,6 +8,7 @@
             <th>Id</th>
             <th>Usuario</th>
             <th>Nombre</th>
+            <th>email</th>
             <th></th>
         </tr>
     </thead>
