@@ -22,6 +22,7 @@ class Usuarios extends Controller{
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+
     public function validar()
     {
         if(empty($_POST['usuario'] ) || empty($_POST['clave'])){
@@ -51,6 +52,8 @@ class Usuarios extends Controller{
         $clave = $_POST['clave1'];
         $confirmar = $_POST['confirmar'];
         $id = $_POST['id'];
+        $id1 = $_POST['correo1'];
+
         $hash = hash("SHA256", $clave);
 
         if (empty($usuario) || empty($nombre)){
@@ -60,7 +63,7 @@ class Usuarios extends Controller{
                 if ($clave != $confirmar) {
                     $msg = "Las contraseñas no coinciden";
                 }else{
-                    $data = $this->model->registrarUsuario($usuario, $nombre, $hash);
+                    $data = $this->model->registrarUsuario($usuario, $nombre, $hash, $id1);
                     if ($data == "ok") {
                         $msg = "si";
                     }else if($data == "existe"){
@@ -103,4 +106,5 @@ class Usuarios extends Controller{
         die();
     }
 }
+
 ?>
