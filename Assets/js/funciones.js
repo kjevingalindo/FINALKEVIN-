@@ -327,4 +327,167 @@ function frmTarea(){
     $("#nueva_tarea").modal("show");
 }
 
-fun
+function agregarTarea(e) {
+    e.preventDefault();
+    const titulo = document.getElementById("titulo");
+    const fecha_actual = document.getElementById("fecha_actual");
+    const fecha_ven = document.getElementById("fecha_vencimiento");
+    const contenido = document.getElementById("contenido");
+    const prioridad = document.getElementById("prioridad");
+
+    if (titulo.value == "" || fecha_actual.value == "" || fecha_ven.value == "" || contenido.value == "" || prioridad.value == "" ) {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Todos los campos son obligatorios',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }else{
+        const url = base_url + "Todas/agregar";
+        const frm = document.getElementById("frmTarea");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                if (res == "si"){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Tarea registrada con éxito',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    frm.reset();
+                    $("#nueva_tarea").modal('hide');
+                    tblTodas.ajax.reload();
+                    location.reload();
+                }else if (res == "modificado"){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Tarea modificada con éxito',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    frm.reset();
+                    $("#nueva_tarea").modal('hide');
+                    tblTodas.ajax.reload();
+                }else{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'error',
+                        title: res,
+                        showConfirmButton: false,
+                        timer: 1500
+                      })
+                }
+            }
+        }
+    }
+}
+
+function btnEditarTarea(id_tarea){
+    document.getElementById("title_tarea").innerHTML = "Editar Tarea";
+    document.getElementById("btnAccion").innerHTML = "Modificar";
+
+    const url = base_url + "Todas/editar/"+id_tarea;
+    const http = new XMLHttpRequest();
+    http.open("GET", url, true);
+    http.send();
+    http.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+            const res = JSON.parse(this.responseText);
+            document.getElementById("id_tarea").value = res.id_tarea;
+            document.getElementById("titulo").value = res.titulo;
+            document.getElementById("fecha_actual").value = res.fecha;
+            document.getElementById("fecha_vencimiento").value = res.fechaVen;
+            document.getElementById("contenido").value = res.texto;
+            document.getElementById("prioridad").value = res.prioridad;
+            $("#nueva_tarea").modal("show");
+
+        }
+    }
+}
+
+function btnEliminarTarea(id_tarea){
+    Swal.fire({
+        title: 'Esta seguro de eliminar?',
+        text: "La tarea se eliminara!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Todas/eliminar/"+id_tarea;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    if (res == "ok"){
+                        Swal.fire(
+                            'Eliminado!',
+                            'Tarea eliminada con exito.',
+                            'success'
+                        )
+                        tblTodas.ajax.reload();
+                    }else{
+                        Swal.fire(
+                            'Mensaje!',
+                             res,
+                            'error'
+                        )
+                    }
+                }
+            }
+            
+        }
+    })
+}
+
+function btnArchivarTarea(id_tarea){
+    Swal.fire({
+        title: 'Esta seguro de archivar?',
+        text: "La tarea no se elimanara solo sera archivada!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'No',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            const url = base_url + "Todas/archivar/"+id_tarea;
+            const http = new XMLHttpRequest();
+            http.open("GET", url, true);
+            http.send();
+            http.onreadystatechange = function(){
+                if (this.readyState == 4 && this.status == 200) {
+                    const res = JSON.parse(this.responseText);
+                    if (res == "ok"){
+                        Swal.fire(
+                            'Archivado!',
+                            'Tarea archivada con exito.',
+                            'success'
+                        )
+                        tblTodas.ajax.reload();
+                    }else{
+                        Swal.fire(
+                            'Mensaje!',
+                             res,
+                            'error'
+                        )
+                    }
+                }
+            }
+            
+        }
+    })
+}
