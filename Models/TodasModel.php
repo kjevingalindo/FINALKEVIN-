@@ -91,6 +91,7 @@ class TodasModel extends Query{
         $this->contenido = $data['texto'];
         $this->prioridad = $data['prioridad'];
 
+        
         $sql_a = "INSERT INTO archivados (id_usuario, id_tarea, titulo, fecha, fechaven, texto, prioridad)VALUES (?,?,?,?,?,?,?)";
         $datos_a = array($this->id_usuario, $this->$id, $this->titulo, $this->fecha_actual, $this->fecha_ven, $this->contenido, $this->prioridad);
 
@@ -102,4 +103,5 @@ class TodasModel extends Query{
     }
 
 }
+
 ?>
