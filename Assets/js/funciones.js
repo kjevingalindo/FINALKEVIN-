@@ -386,7 +386,7 @@ function agregarTarea(e) {
                 }
             }
         }
-    }
+    } 
 }
 
 function btnEditarTarea(id_tarea){
