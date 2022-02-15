@@ -20,19 +20,20 @@ class UsuariosModel extends Query{
         $data = $this->selectAll($sql);
         return $data;
     }
-    public function registrarUsuario(string $usuario, string $nombre, string $clave, string $id1)
+    public function registrarUsuario(string $usuario, string $nombre, string $clave, string $correo, string $respuesta)
     {
         $this->usuario = $usuario;
         $this->nombre = $nombre;
         $this->clave = $clave;
-        $this->id = $id1;
+        $this->correo = $correo;
+        $this->respuesta = $respuesta;
         
 
         $verificar = "SELECT * FROM usuarios WHERE usuario = '$this->usuario'";
         $existe = $this->select($verificar);
         if (empty($existe)) {
-            $sql = "INSERT INTO usuarios (usuario, nombre, email,clave) VALUES (?,?,?,?)";
-            $datos = array($this->usuario, $this->nombre, $this->id, $this->clave);
+            $sql = "INSERT INTO usuarios (usuario, nombre, clave, email, respuesta) VALUES (?,?,?,?,?)";
+            $datos = array($this->usuario, $this->nombre, $this->clave, $this->correo, $this->respuesta);
 
             $data = $this->save($sql, $datos);
             if ($data == 1) {
@@ -85,6 +86,31 @@ class UsuariosModel extends Query{
         return $data;
     }
 
+    public function recuperarUsuario(string $usuario, string $respuesta)
+    {
+        $sql = "SELECT * FROM usuarios WHERE usuario = '$usuario' and respuesta = '$respuesta'";
+        $data = $this->select($sql);
+        return $data;
+    }
+
+    public function actualizarUsuario(string $usuario, string $clave)
+    {
+        $this->usario = $usuario;
+        $this->clave = $clave; 
+
+        $sql = "UPDATE usuarios SET clave=? WHERE usuario = ? ";
+        $datos = array($this->clave, $this->usuario);
+        $data = $this->save($sql, $datos);
+
+        if($data == 1) {
+            $res = "modificado";
+        }else{
+            $res = "error";
+        }
+
+        return $res;
+    }
+    
 }
 
 ?>
