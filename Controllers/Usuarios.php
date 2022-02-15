@@ -51,8 +51,9 @@ class Usuarios extends Controller{
         $nombre = $_POST['nombre1'];
         $clave = $_POST['clave1'];
         $confirmar = $_POST['confirmar'];
+        $respuesta = $_POST['respuesta']
         $id = $_POST['id'];
-        $id1 = $_POST['correo1'];
+        $correo = $_POST['correo1'];
 
         $hash = hash("SHA256", $clave);
 
@@ -63,7 +64,7 @@ class Usuarios extends Controller{
                 if ($clave != $confirmar) {
                     $msg = "Las contraseñas no coinciden";
                 }else{
-                    $data = $this->model->registrarUsuario($usuario, $nombre, $hash, $id1);
+                    $data = $this->model->registrarUsuario($usuario, $nombre, $hash, $correo, $respuesta);
                     if ($data == "ok") {
                         $msg = "si";
                     }else if($data == "existe"){
@@ -102,6 +103,43 @@ class Usuarios extends Controller{
         }else{
             $msg = "Error al eliminar usuario";
         }
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function recuperar()
+    {
+        $usuario = $_POST['usuario_recuperar'];
+        $respuesta = $_POST['respuesta'];
+
+        $data = $this->model->recuperarUsuario($usuario, $respuesta);
+        if ($data) {
+            $_SESSION['usuarioR'] = $usuario;
+            $msg = "ok";
+        }else{
+            $msg = "Respuesta o usuario incorrecto"
+        }
+
+        echo json_encode($msg, JSON_UNESCAPED_UNICODE);
+        die();
+    }
+
+    public function actualizarClave()
+    {
+        $usuario = $_SESSION['usuarioR'];
+        $clave = $_POST['clave_n'];
+
+        $hash = hash("SHA256", $clave);
+
+        $msg = $usuario; 
+        $data = $this->model->actualizarClaveUser($usuario, $hash);
+
+        if ($data == "modificado"){
+            $msg = "modificado";
+        }else{
+            $msg = "Error al modificar contraseña"
+        }
+
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
         die();
     }
