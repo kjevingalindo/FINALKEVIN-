@@ -51,7 +51,7 @@ class Usuarios extends Controller{
         $nombre = $_POST['nombre1'];
         $clave = $_POST['clave1'];
         $confirmar = $_POST['confirmar'];
-        $respuesta = $_POST['respuesta']
+        $respuesta = $_POST['respuesta'];
         $id = $_POST['id'];
         $correo = $_POST['correo1'];
 
@@ -117,7 +117,7 @@ class Usuarios extends Controller{
             $_SESSION['usuarioR'] = $usuario;
             $msg = "ok";
         }else{
-            $msg = "Respuesta o usuario incorrecto"
+            $msg = "Respuesta o usuario incorrecto";
         }
 
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
@@ -137,7 +137,7 @@ class Usuarios extends Controller{
         if ($data == "modificado"){
             $msg = "modificado";
         }else{
-            $msg = "Error al modificar contraseña"
+            $msg = "Error al modificar contraseña";
         }
 
         echo json_encode($msg, JSON_UNESCAPED_UNICODE);
