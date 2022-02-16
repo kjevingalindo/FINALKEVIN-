@@ -9,6 +9,7 @@ class Pendientes extends Controller{
     {
         $this->views->getView($this, "index");
     }
+
     public function listar()
     {   
         $id = $_SESSION['id_usuario'];
@@ -16,6 +17,7 @@ class Pendientes extends Controller{
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
         die();
     }
+
 }
 
 ?>
