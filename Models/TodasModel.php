@@ -2,16 +2,16 @@
 
 class TodasModel extends Query{
     private $id, $titulo, $fecha_actual, $fecha_ven, $contenido, $prioridad;
-    public function __contruc()
+    public function __construct() 
     {
-        parent:: __contruc();
+        parent::__construct();
     }
-
-    public function getTareas(int $id_usario)
+    
+    public function getTareas(int $id_usuario)
     {
         $sql = "SELECT * FROM tareas WHERE id_usuario='$id_usuario'";
-        $data = $this->sellectAll($sql);
-        return $data;
+        $data = $this->selectAll($sql);
+        return $data;   
     }
 
     public function editarTarea(int $id_tarea)
@@ -53,13 +53,13 @@ class TodasModel extends Query{
         $this->contenido = $contenido;
         $this->prioridad = $prioridad;
 
-        $sql = "INSERT * FROM tareas (id_usuario, titulo, fecha, fechaVen, texto, prioridad) VALUES (?,?,?,?,?,?)";
+        $sql = "INSERT INTO tareas (id_usuario, titulo, fecha, fechaVen, texto, prioridad) VALUES (?,?,?,?,?,?)";
 
-        $datos = array($this-> $id, $this->$titulo, $this->$fecha_actual, $this->$fecha_ven, $this->$contenido, $this->$prioridad );
+        $datos = array($this->id, $this->titulo, $this->fecha_actual, $this->fecha_ven, $this->contenido, $this->prioridad);
 
         $data = $this->save($sql, $datos);
 
-        if ($data == 1){
+        if ($data == 1) {
             $res = "ok";
         }else{
             $res = "error";
@@ -70,7 +70,7 @@ class TodasModel extends Query{
 
     public function eliminarTarea(int $id)
     {
-        $this->id= $id;
+        $this->id = $id;
         $sql = "DELETE FROM tareas WHERE id_tarea = ?";
         $datos = array($this->id);
         $data = $this->save($sql, $datos);
@@ -91,9 +91,9 @@ class TodasModel extends Query{
         $this->contenido = $data['texto'];
         $this->prioridad = $data['prioridad'];
 
-        
-        $sql_a = "INSERT INTO archivados (id_usuario, id_tarea, titulo, fecha, fechaven, texto, prioridad)VALUES (?,?,?,?,?,?,?)";
-        $datos_a = array($this->id_usuario, $this->$id, $this->titulo, $this->fecha_actual, $this->fecha_ven, $this->contenido, $this->prioridad);
+
+        $sql_a = "INSERT INTO archivados (id_usuario, id_tarea, titulo, fecha, fechaVen, texto, prioridad) VALUES (?,?,?,?,?,?,?)";
+        $datos_a = array($this->id_usuario, $this->id, $this->titulo, $this->fecha_actual, $this->fecha_ven, $this->contenido, $this->prioridad);
         $data_a = $this->save($sql_a, $datos_a);
 
         $sql = "DELETE FROM tareas WHERE id_tarea = ?";
@@ -102,7 +102,6 @@ class TodasModel extends Query{
 
         return $data_t;
     }
-
 }
 
 ?>
