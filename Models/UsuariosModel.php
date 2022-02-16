@@ -28,7 +28,6 @@ class UsuariosModel extends Query{
         $this->correo = $correo;
         $this->respuesta = $respuesta;
         
-
         $verificar = "SELECT * FROM usuarios WHERE usuario = '$this->usuario'";
         $existe = $this->select($verificar);
         if (empty($existe)) {

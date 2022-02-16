@@ -3,7 +3,7 @@
 class PendientesModel extends Query{
     public function __construct()
     {
-        parent:: __construct();
+        parent::__construct();
     }
     public function getTareasPendientes(int $id_usuario)
     {

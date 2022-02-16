@@ -59,6 +59,7 @@
                         <label for="contenido">Contenido</label>
                         <input id="contenido" class="form-control" type="textarea" name="contenido" placeholder="Contenido">
                     </div>
+                    
                     <div class="form-group">
                         <label for="contenido">Prioridad</label>
                         <select name="prioridad" id="prioridad" class="form-control">
