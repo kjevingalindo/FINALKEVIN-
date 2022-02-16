@@ -194,14 +194,20 @@ function frmRegister(){
     document.getElementById("id").value = "";
 }
 
+function frmRecuperar(){
+    document.getElementById("frmRecuperar").reset();
+    $("#recuperar").modal("show");
+}
+
 function registrarUser(e){
     e.preventDefault();
     const usuario = document.getElementById("usuario1");
     const nombre = document.getElementById("nombre1");
     const clave = document.getElementById("clave1");
     const confirmar = document.getElementById("confirmar");
+    const respuesta = document.getElementById("respuesta");
 
-    if (usuario.value == "" || nombre.value == "") {
+    if (usuario.value == "" || nombre.value == "" || respuesta.value == "") {
         Swal.fire({
             position: 'top-end',
             icon: 'error',
