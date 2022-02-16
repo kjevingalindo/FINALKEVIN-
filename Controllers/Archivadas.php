@@ -1,16 +1,17 @@
 <?php
 
 class Archivadas extends Controller{
-    public function __constructor(){
+    public function __construct(){
         session_start();
-        parent::__constructor();
-    }
+        parent::__construct();
+    } 
     public function index()
     {
         $this->views->getView($this, "index");
     }
+
     public function listar()
-    {
+    {   
         $id = $_SESSION['id_usuario'];
         $data = $this->model->getTareasArchivadas($id);
         echo json_encode($data, JSON_UNESCAPED_UNICODE);
