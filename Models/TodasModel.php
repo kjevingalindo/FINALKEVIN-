@@ -94,6 +94,7 @@ class TodasModel extends Query{
         
         $sql_a = "INSERT INTO archivados (id_usuario, id_tarea, titulo, fecha, fechaven, texto, prioridad)VALUES (?,?,?,?,?,?,?)";
         $datos_a = array($this->id_usuario, $this->$id, $this->titulo, $this->fecha_actual, $this->fecha_ven, $this->contenido, $this->prioridad);
+        $data_a = $this->save($sql_a, $datos_a);
 
         $sql = "DELETE FROM tareas WHERE id_tarea = ?";
         $datos = array($this->id);
