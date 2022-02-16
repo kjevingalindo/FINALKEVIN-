@@ -1,7 +1,7 @@
 <?php
 
 class UsuariosModel extends Query{
-    private $usuario, $nombre, $clave, $id;
+    private $usuario, $nombre, $clave, $id, $respuesta;
     public function __construct() 
     {
         parent::__construct();
@@ -92,16 +92,16 @@ class UsuariosModel extends Query{
         return $data;
     }
 
-    public function actualizarUsuario(string $usuario, string $clave)
+    public function actualizarClaveUser(string $usuario, string $clave) 
     {
-        $this->usario = $usuario;
-        $this->clave = $clave; 
+        $this->usuario = $usuario;
+        $this->clave = $clave;
 
         $sql = "UPDATE usuarios SET clave=? WHERE usuario = ? ";
         $datos = array($this->clave, $this->usuario);
         $data = $this->save($sql, $datos);
 
-        if($data == 1) {
+        if ($data == 1) {
             $res = "modificado";
         }else{
             $res = "error";
@@ -109,7 +109,7 @@ class UsuariosModel extends Query{
 
         return $res;
     }
-    
+
 }
 
 ?>
