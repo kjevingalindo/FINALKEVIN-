@@ -280,6 +280,7 @@ function btnEditarUser(id){
         }
     }
 }
+
 function btnEliminarUser(id){
     Swal.fire({
         title: 'Esta seguro de eliminar?',
@@ -320,7 +321,105 @@ function btnEliminarUser(id){
     })
 }
 
+function recuperarContraseña(e) {
+    e.preventDefault();
+    const usuario = document.getElementById("usuario_recuperar");
+    if (usuario.value == "") {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Todos los campos son obligatorios',
+            showConfirmButton: false,
+            timer: 1500
+        })
+    }else{
+        const url = base_url + "Usuarios/recuperar";
+        const frm = document.getElementById("frmRecuperar");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                if (res == "ok"){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Datos correctos',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    frm.reset();
+                    $("#recuperar").modal('hide');
+                    $("#actualizar_clave").modal("show");
 
+                }else{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: res,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    frm.reset();
+
+                }
+            }
+        }
+
+    }
+
+}
+
+function actulizarClave(e) {
+    e.preventDefault();
+    const clave_n = document.getElementById("clave_n");
+    const clave_c = document.getElementById("clave_c");
+
+    if (clave_n.value == "" || clave_c.value == "") {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: 'Todos los campos son obligatorios',
+            showConfirmButton: false,
+            timer: 1500
+          })
+    }else{
+        const url = base_url + "Usuarios/actualizarClave";
+        const frm = document.getElementById("frmActualizarClave");
+        const http = new XMLHttpRequest();
+        http.open("POST", url, true);
+        http.send(new FormData(frm));
+        http.onreadystatechange = function(){
+            if (this.readyState == 4 && this.status == 200) {
+                const res = JSON.parse(this.responseText);
+                if (res == "modificado"){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Contraseña actualizada',
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    frm.reset();
+                    $("#actualizar_clave").modal("hide");
+
+                }else{
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'warning',
+                        title: res,
+                        showConfirmButton: false,
+                        timer: 1500
+                    })
+                    frm.reset();
+
+                }
+            }
+        }
+    }
+    
+}
 
 // TAREAS
 

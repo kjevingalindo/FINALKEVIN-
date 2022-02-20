@@ -10,7 +10,7 @@
         <link href="<?php echo base_url; ?>Assets/css/styles.css" rel="stylesheet" />
         <script src="<?php echo base_url; ?>Assets/js/all.min.js" crossorigin="anonymous"></script>
     </head>
-    <body class="bg-primary">
+    <body class="bg-dark">
         <div id="layutAuthentication">
             <div id="layutAuthentication_content">
                 <main>
@@ -203,6 +203,6 @@
         </script>
         <script src="<?php echo base_url; ?>Assets/js/sweetalert2.all.min.js"></script>
         <script src="<?php echo base_url; ?>Assets/js/funciones.js"></script>
-        
+
     </body>
 </html>
